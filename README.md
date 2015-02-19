@@ -4,7 +4,7 @@
 
 ##### Supported file formats
 
-  * [ZIP](wiki/ZIP) - compares only file names, size and CRC.
+  * [ZIP](https://github.com/vurdalakov/rawcmp/wiki/ZIP) - compares only file names, size and CRC.
 
 ##### Syntax
 

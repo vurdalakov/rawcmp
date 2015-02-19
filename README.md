@@ -4,7 +4,7 @@
 
 ##### Supported file formats
 
-  * ZIP - compares only file names, size and CRC.
+  * [ZIP](wiki/ZIP) - compares only file names, size and CRC.
 
 ##### Syntax
 

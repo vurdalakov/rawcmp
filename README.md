@@ -1,6 +1,10 @@
 # Raw File Compare
 
-`rawcmp` command-line tool compares raw content of two files, ignoring insignificant data and metadata (archive comments, MP3 tags, image thumbnails, etc.)
+##### Overview
+
+`rawcmp` is a command-line tool that compares raw content of two files, ignoring metadata and other insignificant data (archive comments, MP3 tags, image thumbnails, etc.)
+
+This tool is part of [`dostools` collection](https://github.com/vurdalakov/dostools).
 
 ##### Supported file formats
 

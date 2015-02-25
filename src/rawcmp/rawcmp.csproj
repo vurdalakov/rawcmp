@@ -47,6 +47,7 @@
     <Compile Include="RawFile.cs" />
     <Compile Include="RawFiles\ZipFile.cs" />
     <Compile Include="Vurdalakov\BinaryReaderExtensions.cs" />
+    <Compile Include="Vurdalakov\DosToolsApplication.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

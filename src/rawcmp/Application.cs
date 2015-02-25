@@ -3,31 +3,17 @@
     using System;
     using System.IO;
 
-    public class Application
+    public class Application : DosToolsApplication
     {
-        private CommandLineParser _commandLineParser;
-        private Boolean _silent;
-
-        public Application(String[] args)
+        public Application(String[] args) : base(args)
         {
-            try
-            {
-                _commandLineParser = new CommandLineParser(args);
-
-                if (_commandLineParser.FileNames.Length != 2)
-                {
-                    throw new Exception();
-                }
-
-                _silent = _commandLineParser.IsOptionSet("silent");
-            }
-            catch
+            if (_commandLineParser.FileNames.Length != 2)
             {
                 Help();
             }
         }
 
-        public void Run()
+        protected override Int32 Execute()
         {
             try
             {
@@ -39,7 +25,7 @@
                 if (!Path.GetExtension(fileName1).Equals(".zip") || !Path.GetExtension(fileName2).Equals(".zip"))
                 {
                     Print("Unsupported file format");
-                    Environment.Exit(3);
+                    return 3;
                 }
 
                 var zipFile1 = new ZipFile();
@@ -52,24 +38,16 @@
 
                 Print(filesAreEqual ? "No differences encountered" : "Files are different");
 
-                Environment.Exit(filesAreEqual ? 0 : 1);
+                return filesAreEqual ? 0 : 1;
             }
             catch (Exception ex)
             {
                 Print("Error comparing files: {0}", ex.Message);
-                Environment.Exit(2);
+                return 2;
             }
         }
 
-        private void Print(String format, params Object[] args)
-        {
-            if (!_silent)
-            {
-                Console.WriteLine(String.Format(format, args));
-            }
-        }
-
-        private void Help()
+        protected override void Help()
         {
             Console.WriteLine("Raw File Compare 1.0 | (c) Vurdalakov | https://github.com/vurdalakov/rawcmp\n");
             Console.WriteLine("Compares raw content of two files, ignoring insignificant data and metadata\n(archive comments, MP3 tags, image thumbnails, etc.)\n");

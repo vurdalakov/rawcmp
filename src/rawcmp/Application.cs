@@ -22,19 +22,10 @@
 
                 Print("Comparing files {0} and {1}", fileName1, fileName2);
 
-                if (!Path.GetExtension(fileName1).Equals(".zip") || !Path.GetExtension(fileName2).Equals(".zip"))
-                {
-                    Print("Unsupported file format");
-                    return 3;
-                }
+                var rawCompare = new RawCompare();
+                rawCompare.AddFormat(typeof(ZipFile));
 
-                var zipFile1 = new ZipFile();
-                zipFile1.Read(fileName1);
-
-                var zipFile2 = new ZipFile();
-                zipFile2.Read(fileName2);
-
-                var filesAreEqual = zipFile1.IsSameAs(zipFile2);
+                var filesAreEqual = rawCompare.AreEqual(fileName1, fileName2);
 
                 Print(filesAreEqual ? "No differences encountered" : "Files are different");
 

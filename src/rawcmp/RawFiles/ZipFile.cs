@@ -18,7 +18,7 @@
             FileCrc = fileCrc;
         }
 
-        public Boolean IsSameAs(ZipFileRecord record)
+        public Boolean IsEqualTo(ZipFileRecord record)
         {
             return FileName.ToLower().Equals(record.FileName.ToLower()) && (FileSize == record.FileSize) && (FileCrc == record.FileCrc);
         }
@@ -26,6 +26,11 @@
 
     public class ZipFile: RawFile
     {
+        protected override Boolean IsSupported(BinaryReader binaryReader)
+        {
+            return true; // TODO
+        }
+
         public ZipFileRecord[] FileRecords { get; private set; }
 
         protected override void Read(BinaryReader binaryReader)
@@ -114,7 +119,7 @@
             return new ZipFileRecord(fileName, fileSize, fileCrc);
         }
 
-        public override Boolean IsSameAs(RawFile rawFile)
+        public override Boolean IsEqualTo(RawFile rawFile)
         {
             var zipFile = rawFile as ZipFile;
             if (null == zipFile)
@@ -141,7 +146,7 @@
 
             for (int i = 0; i < records1.Count; i++)
             {
-                if (!records1[i].IsSameAs(records2[i]))
+                if (!records1[i].IsEqualTo(records2[i]))
                 {
                     return false;
                 }

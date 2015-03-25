@@ -2,14 +2,21 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.Reflection;
 
     public class RawCompare
     {
         private List<Type> _types = new List<Type>();
 
-        public void AddFormat(Type type)
+        public RawCompare()
         {
-            _types.Add(type);
+            foreach (var type in Assembly.GetExecutingAssembly().GetTypes())
+            {
+                if (type.IsClass && type.IsSubclassOf(typeof(RawFile)))
+                {
+                    _types.Add(type);
+                }
+            }
         }
 
         public Boolean AreEqual(String fileName1, String fileName2)

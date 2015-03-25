@@ -23,8 +23,6 @@
                 Print("Comparing files {0} and {1}", fileName1, fileName2);
 
                 var rawCompare = new RawCompare();
-                rawCompare.AddFormat(typeof(ZipFile));
-
                 var filesAreEqual = rawCompare.AreEqual(fileName1, fileName2);
 
                 Print(filesAreEqual ? "No differences encountered" : "Files are different");

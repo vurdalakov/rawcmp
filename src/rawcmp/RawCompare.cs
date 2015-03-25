@@ -15,9 +15,14 @@
         public Boolean AreEqual(String fileName1, String fileName2)
         {
             var rawFile1 = GetFile(fileName1);
-            rawFile1.Read(fileName1);
-
             var rawFile2 = GetFile(fileName2);
+
+            if (rawFile1.GetType() != rawFile2.GetType())
+            {
+                throw new RawCompareException(4, "File formats are different");
+            }
+
+            rawFile1.Read(fileName1);
             rawFile2.Read(fileName2);
 
             return rawFile1.IsEqualTo(rawFile2);
@@ -39,7 +44,7 @@
                 }
             }
 
-            return null;
+            throw new RawCompareException(3, "Unsupported file format: {0}", fileName);
         }
     }
 }

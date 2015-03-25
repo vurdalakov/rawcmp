@@ -24,6 +24,8 @@ rawcmp file1 file2 [-silent]
   * 1 - files are different;
   * 2 - one or both files not found;
   * 3 - unsupported file format;
+  * 4 - file formats are different;
+  * 9 - other error;
   * -1 - invalid command line syntax.
 
 ##### License

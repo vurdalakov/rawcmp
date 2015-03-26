@@ -26,9 +26,26 @@
 
     public class ZipFile: RawFile
     {
+        private const UInt32 _signature = 0x06054b50;
+
         protected override Boolean IsSupported(BinaryReader binaryReader)
         {
-            return true; // TODO
+            try
+            {
+                binaryReader.Seek(-17, SeekOrigin.End);
+                do
+                {
+                    var endOfCentralDirectoryRecordOffset = binaryReader.Seek(-5, SeekOrigin.Current);
+                    if (_signature == binaryReader.ReadUInt32())
+                    {
+                        return true;
+                    }
+                }
+                while (binaryReader.BaseStream.Position > 0);
+            }
+            catch { }
+
+            return false;
         }
 
         public ZipFileRecord[] FileRecords { get; private set; }
@@ -49,7 +66,7 @@
                 {
                     var endOfCentralDirectoryRecordOffset = binaryReader.Seek(-5, SeekOrigin.Current);
                     UInt32 signature = binaryReader.ReadUInt32();
-                    if (0x06054b50 == signature)
+                    if (_signature == signature)
                     {
                         binaryReader.Skip(6);
 

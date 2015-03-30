@@ -5,6 +5,7 @@
     using System.IO;
     using System.Text;
 
+    [Incomplete]
     public class Mp3File : RawFile
     {
         protected override Boolean IsSupported(BinaryReader binaryReader)

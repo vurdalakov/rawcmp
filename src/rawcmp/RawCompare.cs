@@ -39,6 +39,13 @@
         {
             foreach (Type type in _types)
             {
+#if !DEBUG
+                if (type.HasAttribute<IncompleteAttribute>())
+                {
+                    continue;
+                }
+#endif
+
                 var rawFile = Activator.CreateInstance(type) as RawFile;
                 if (null == rawFile)
                 {

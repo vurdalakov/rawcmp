@@ -44,7 +44,7 @@
     <Compile Include="RawCompare.cs" />
     <Compile Include="RawCompareException.cs" />
     <Compile Include="RawFiles\Mp3File.cs" />
-    <Compile Include="Vurdalakov\AttributeExtensions.cs" />
+    <Compile Include="Vurdalakov\TypeExtensions.cs" />
     <Compile Include="Vurdalakov\CommandLineParser.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
